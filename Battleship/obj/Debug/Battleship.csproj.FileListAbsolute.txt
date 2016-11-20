@@ -1,0 +1,9 @@
+C:\Users\Алекс\Documents\GitHub\Lab6_YaP\Battleship\Battleship\bin\Debug\Battleship.exe.config
+C:\Users\Алекс\Documents\GitHub\Lab6_YaP\Battleship\Battleship\bin\Debug\Battleship.exe
+C:\Users\Алекс\Documents\GitHub\Lab6_YaP\Battleship\Battleship\bin\Debug\Battleship.pdb
+C:\Users\Алекс\Documents\GitHub\Lab6_YaP\Battleship\Battleship\obj\Debug\Battleship.csprojResolveAssemblyReference.cache
+C:\Users\Алекс\Documents\GitHub\Lab6_YaP\Battleship\Battleship\obj\Debug\Battleship.Form1.resources
+C:\Users\Алекс\Documents\GitHub\Lab6_YaP\Battleship\Battleship\obj\Debug\Battleship.Properties.Resources.resources
+C:\Users\Алекс\Documents\GitHub\Lab6_YaP\Battleship\Battleship\obj\Debug\Battleship.csproj.GenerateResource.Cache
+C:\Users\Алекс\Documents\GitHub\Lab6_YaP\Battleship\Battleship\obj\Debug\Battleship.exe
+C:\Users\Алекс\Documents\GitHub\Lab6_YaP\Battleship\Battleship\obj\Debug\Battleship.pdb
