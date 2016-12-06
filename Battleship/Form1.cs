@@ -114,7 +114,6 @@ namespace Battleship
         private void CreateField()
         {
             panel1.Controls.Clear();
-            //panel2.Controls.Clear();
             // обнуляем массив картинок
             CompField = new PictureBox[Col, Row];
 
@@ -299,7 +298,8 @@ namespace Battleship
             {
                 StartGame_button.Enabled = false;
                 StopGame_button.Enabled = true;
-                //groupBox5.Enabled = false;
+                groupBox5.Enabled = false;
+                listBox1.Items.Add("Игра начата");
                 CreateRound();
                 CreateField();
             }
@@ -365,6 +365,8 @@ namespace Battleship
             FallGame();
             StopGame_button.Enabled = false;
             StartGame_button.Enabled = true;
+            groupBox5.Enabled = true;
+            listBox1.Items.Clear();
             MessageBox.Show("Вы досрочно закончили игру, можете начать новую.", "Игра завершена");
         }
         // Создание кораблей игрока (при выборе кнопки сгенерировать)
@@ -442,19 +444,36 @@ namespace Battleship
         {
             if (Gen_checkBox.Checked)
             {
-                FallGame();
+                UserShips = new Ship[Col, Row];
+                panel2.Controls.Clear();
                 CreateUserShips();
                 VisibleUserShips();
             }
             else
             {
-                FallGame();
+                UserShips = new Ship[Col, Row];
+                panel2.Controls.Clear();
+
             }
+        }
+
+        private void CompDataClear()
+        {
+            // Обнуляем массив картинок компьютера
+            CompField = new PictureBox[Col, Row];
+            // Обнуляем игровое поле компьютера
+            CompShips = new Ship[Col, Row];
+            panel1.Controls.Clear();
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void CreateRound()
         {
-            FallGame();
+            CompDataClear();
             CreateCompShips();
         }
     }
