@@ -16,3 +16,12 @@ C:\Users\Алекс\Documents\GitHub\BattleShip\Battleship\obj\Debug\Battleship.
 C:\Users\Алекс\Documents\GitHub\BattleShip\Battleship\obj\Debug\Battleship.Form1.resources
 C:\Users\Алекс\Documents\GitHub\BattleShip\Battleship\obj\Debug\Battleship.Properties.Resources.resources
 C:\Users\Алекс\Documents\GitHub\BattleShip\Battleship\obj\Debug\Battleship.csproj.GenerateResource.Cache
+C:\Users\Alex\Desktop\RP\Курсовая\2curs\BattleShip\Battleship\bin\Debug\Battleship.exe.config
+C:\Users\Alex\Desktop\RP\Курсовая\2curs\BattleShip\Battleship\obj\Debug\Battleship.exe
+C:\Users\Alex\Desktop\RP\Курсовая\2curs\BattleShip\Battleship\obj\Debug\Battleship.pdb
+C:\Users\Alex\Desktop\RP\Курсовая\2curs\BattleShip\Battleship\bin\Debug\Battleship.exe
+C:\Users\Alex\Desktop\RP\Курсовая\2curs\BattleShip\Battleship\bin\Debug\Battleship.pdb
+C:\Users\Alex\Desktop\RP\Курсовая\2curs\BattleShip\Battleship\obj\Debug\Battleship.csprojResolveAssemblyReference.cache
+C:\Users\Alex\Desktop\RP\Курсовая\2curs\BattleShip\Battleship\obj\Debug\Battleship.Form1.resources
+C:\Users\Alex\Desktop\RP\Курсовая\2curs\BattleShip\Battleship\obj\Debug\Battleship.Properties.Resources.resources
+C:\Users\Alex\Desktop\RP\Курсовая\2curs\BattleShip\Battleship\obj\Debug\Battleship.csproj.GenerateResource.Cache

@@ -13,6 +13,12 @@ namespace Battleship
     public partial class Form1 : Form
     {
         Random rand = new Random();
+        int P4 = 1;
+        int P3 = 2;
+        int P2 = 3;
+        int P1 = 4;
+        RadioButton CheckedShip;
+
         // Кол-во столбцов/строк
         private const int
            Col = 10,
@@ -38,6 +44,7 @@ namespace Battleship
         public Form1()
         {
             InitializeComponent();
+            VisibleClearUserField();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -90,7 +97,7 @@ namespace Battleship
             }
         }
         // Обработчик клика по полю компьютера
-        private void ClickPicture(Object sender, EventArgs e)
+        private void ClickCompField(Object sender, EventArgs e)
         {
             PictureBox SenderPicture = sender as PictureBox;
 
@@ -113,7 +120,7 @@ namespace Battleship
         // Рисуем поле компьютера (чистое море)
         private void CreateField()
         {
-            panel1.Controls.Clear();
+            Comp_panel.Controls.Clear();
             // обнуляем массив картинок
             CompField = new PictureBox[Col, Row];
 
@@ -131,12 +138,12 @@ namespace Battleship
                         Size = new System.Drawing.Size(20, 20),
                         SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
                     };
-                    panel1.Controls.Add(Picture);
+                    Comp_panel.Controls.Add(Picture);
                     PosX += 20;
                     //
                     CompField[x, y] = Picture;
 
-                    Picture.Click += ClickPicture;
+                    Picture.Click += ClickCompField;
                 }
                 PosX = 0;
                 PosY += 20;
@@ -291,15 +298,32 @@ namespace Battleship
                 }
             }
         }
-
+        //Ставим корабль в выюранную клетку
+        private void ShipsGenerate(int Length, int x, int y, int vect, Ship Ship)
+        {
+            if (vect == 1)
+            {
+                for (int i = 0; i < Length; i++)
+                {
+                    UserShips[x + i, y] = Ship;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < Length; i++)
+                {
+                    UserShips[x, y + i] = Ship;
+                }
+            }
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             if (Gen_checkBox.Checked)
             {
                 StartGame_button.Enabled = false;
                 StopGame_button.Enabled = true;
-                groupBox5.Enabled = false;
-                listBox1.Items.Add("Игра начата");
+                Ships_groupBox.Enabled = false;
+                GameLog_listBox.Items.Add("Игра начата");
                 CreateRound();
                 CreateField();
             }
@@ -356,8 +380,8 @@ namespace Battleship
             UserField = new PictureBox[Col, Row];
             // Обнуляем игровое поле пользователя
             UserShips = new Ship[Col, Row];
-            panel1.Controls.Clear();
-            panel2.Controls.Clear();
+            Comp_panel.Controls.Clear();
+            User_panel.Controls.Clear();
         }
 
         private void StopGame_button_Click(object sender, EventArgs e)
@@ -365,8 +389,9 @@ namespace Battleship
             FallGame();
             StopGame_button.Enabled = false;
             StartGame_button.Enabled = true;
-            groupBox5.Enabled = true;
-            listBox1.Items.Clear();
+            Ships_groupBox.Enabled = true;
+            GameLog_listBox.Items.Clear();
+            VisibleClearUserField();
             MessageBox.Show("Вы досрочно закончили игру, можете начать новую.", "Игра завершена");
         }
         // Создание кораблей игрока (при выборе кнопки сгенерировать)
@@ -402,7 +427,107 @@ namespace Battleship
             ShipsGenerate("User", 1, Ship1_41);
 
         }
-        // Рисуем корабли сгенерированные случайно
+
+        // Обработчик клика по полю пользователя
+        private void ClickUserField(Object sender, EventArgs e)
+        {
+            PictureBox SenderPicture = sender as PictureBox;
+
+            int x = Convert.ToInt32(SenderPicture.Name.Substring(0, 1));
+            int y = Convert.ToInt32(SenderPicture.Name.Substring(2, 1));
+
+
+
+            try {
+
+                int Checklength = y + Convert.ToInt32(CheckedShip.Name[1].ToString());
+                int Length = Convert.ToInt32(CheckedShip.Name[1].ToString());
+                int vect = Vect_checkBox.Checked ? 1 : 0;
+
+                if (!Vect_checkBox.Checked && Checklength > 10)
+                {
+                    MessageBox.Show("Корабль не влeзет");
+                    return;
+                }
+                else if (Vect_checkBox.Checked && Checklength > 10)
+                {
+                    MessageBox.Show("Корабль не влeзет");
+                    return;
+                }
+                else if (!CheckXY("User", x, y, Length, vect))
+                {
+                    MessageBox.Show("Занято другим кораблем");
+                    return;
+                }
+
+                Ship Ship = new Ship(Length);
+
+                switch (CheckedShip.Name)
+                {
+                    case "P4_radioButton":
+                        {
+                            ShipsGenerate(Length, x, y, vect, Ship);
+                            User_panel.Controls.Clear();
+                            VisibleUserShips();
+                            P4--;
+                            if (P4 == 0)
+                            {
+                                P4_radioButton.Enabled = false;
+                                P4_radioButton.Checked = false;
+                                CheckedShip = null;
+                            }
+                            break;
+                        }
+                    case "P3_radioButton":
+                        {
+                            ShipsGenerate(Length, x, y, vect, Ship);
+                            User_panel.Controls.Clear();
+                            VisibleUserShips();
+                            P3--;
+                            if (P3 == 0)
+                            {
+                                P3_radioButton.Enabled = false;
+                                P3_radioButton.Checked = false;
+                                CheckedShip = null;
+                            }
+                            break;
+                        }
+                    case "P2_radioButton":
+                        {
+                            ShipsGenerate(Length, x, y, vect, Ship);
+                            User_panel.Controls.Clear();
+                            VisibleUserShips();
+                            P2--;
+                            if (P2 == 0)
+                            {
+                                P2_radioButton.Enabled = false;
+                                P2_radioButton.Checked = false;
+                                CheckedShip = null;
+                            }
+                            break;
+                        }
+                    case "P1_radioButton":
+                        {
+                            ShipsGenerate(Length, x, y, vect, Ship);
+                            User_panel.Controls.Clear();
+                            VisibleUserShips();
+                            P1--;
+                            if (P1 == 0)
+                            {
+                                P1_radioButton.Enabled = false;
+                                P1_radioButton.Checked = false;
+                                CheckedShip = null;
+                            }
+                            break;
+                        }
+                }
+            }
+            catch(Exception E)
+            {
+                MessageBox.Show("Выберите тип корабля");
+            }
+        }
+        // Рисуем корабли юзура
         private void VisibleUserShips()
         {
             int PosY = 0;
@@ -426,10 +551,49 @@ namespace Battleship
                         SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
                     };
 
-                    panel2.Controls.Add(Picture);
+                    User_panel.Controls.Add(Picture);
+
+                    Picture.Click += ClickUserField;
+                    PosX += 20;
+                }
+                PosX = 0;
+                PosY += 20;
+            }
+
+
+
+
+        }
+        // Рисуем чистое поле юзеру при старте игры
+        private void VisibleClearUserField()
+        {
+            int PosY = 0;
+            for (int x = 0; x < Col; x++)
+            {
+                int PosX = 0;
+                for (int y = 0; y < Row; y++)
+                {
+                    Image Img;
+                    if (UserShips[x, y] != null)
+                        Img = Images[3];
+                    else
+                        Img = Images[0];
+
+                    PictureBox Picture = new PictureBox()
+                    {
+                        Image = Img,
+                        Location = new System.Drawing.Point(PosX, PosY),
+                        Name = x + ";" + y,
+                        Size = new System.Drawing.Size(20, 20),
+                        SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+                    };
+
+                    User_panel.Controls.Add(Picture);
                     PosX += 20;
                     //
                     UserField[x, y] = Picture;
+
+                    Picture.Click += ClickUserField;
                 }
                 PosX = 0;
                 PosY += 20;
@@ -445,16 +609,31 @@ namespace Battleship
             if (Gen_checkBox.Checked)
             {
                 UserShips = new Ship[Col, Row];
-                panel2.Controls.Clear();
+                UserField = new PictureBox[Col, Row];
+                User_panel.Controls.Clear();
                 CreateUserShips();
                 VisibleUserShips();
+                HandGen_panel.Hide();
             }
             else
             {
                 UserShips = new Ship[Col, Row];
-                panel2.Controls.Clear();
+                UserField = new PictureBox[Col, Row];
+                User_panel.Controls.Clear();
+                HandGen_panel.Show();
 
+                VisibleClearUserField();
+                P4 = 1;
+                P3 = 2;
+                P2 = 3;
+                P1 = 4;
             }
+        }
+
+
+        private void P4_radioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckedShip = (RadioButton)sender;
         }
 
         private void CompDataClear()
@@ -463,12 +642,12 @@ namespace Battleship
             CompField = new PictureBox[Col, Row];
             // Обнуляем игровое поле компьютера
             CompShips = new Ship[Col, Row];
-            panel1.Controls.Clear();
+            Comp_panel.Controls.Clear();
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            MessageBox.Show(Properties.Resources.HandGen);
         }
 
         private void CreateRound()
