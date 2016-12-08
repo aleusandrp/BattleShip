@@ -12,11 +12,14 @@ namespace Battleship
 {
     public partial class Form1 : Form
     {
+
         Random rand = new Random();
-        int P4 = 1;
-        int P3 = 2;
-        int P2 = 3;
-        int P1 = 4;
+
+        private int P4 = 1;
+        private int P3 = 2;
+        private int P2 = 3;
+        private int P1 = 4;
+        
         RadioButton CheckedShip;
 
         // Кол-во столбцов/строк
@@ -45,6 +48,17 @@ namespace Battleship
         {
             InitializeComponent();
             VisibleClearUserField();
+        }
+
+        private bool ChangePSum()
+        {
+            if(P1+P2+P3+P4 == 0)
+            {
+                MessageBox.Show("Все корабли расставлены, можете начать игру");
+                Vect_checkBox.Enabled = false;
+                return true;
+            }
+            return false;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -270,7 +284,7 @@ namespace Battleship
                 if (vect == 1)
                 {
                     y = rand.Next(0, 10);
-                    x = rand.Next(0, 7);
+                    x = rand.Next(0, 11-Length);
 
                     nice = CheckXY(ChooseShip, x, y, Length, vect);
                     if (nice)
@@ -284,7 +298,7 @@ namespace Battleship
                 }
                 else
                 {
-                    y = rand.Next(0, 7);
+                    y = rand.Next(0, 11-Length);
                     x = rand.Next(0, 10);
 
                     nice = CheckXY(ChooseShip, x, y, Length, vect);
@@ -318,7 +332,7 @@ namespace Battleship
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            if (Gen_checkBox.Checked)
+            if (Gen_checkBox.Checked || ChangePSum())
             {
                 StartGame_button.Enabled = false;
                 StopGame_button.Enabled = true;
@@ -326,6 +340,7 @@ namespace Battleship
                 GameLog_listBox.Items.Add("Игра начата");
                 CreateRound();
                 CreateField();
+                StopGame_button.Focus();
             }
             else
             {
@@ -428,6 +443,24 @@ namespace Battleship
 
         }
 
+        public void ShowShip(int Length, int x, int y, int vect)
+        {
+            if (vect == 1)
+            {
+                for (int i = 0; i < Length; i++)
+                {
+                    UserField[x + i, y].Image = Images[3];
+                }
+            }
+            else
+            {
+                for (int i = 0; i < Length; i++)
+                {
+                    UserField[x, y + i].Image = Images[3];
+                }
+            }
+        }
+
         // Обработчик клика по полю пользователя
         private void ClickUserField(Object sender, EventArgs e)
         {
@@ -439,17 +472,18 @@ namespace Battleship
 
 
             try {
-
-                int Checklength = y + Convert.ToInt32(CheckedShip.Name[1].ToString());
+                
+                int CheckLX = x + Convert.ToInt32(CheckedShip.Name[1].ToString());
+                int CheckLY = y + Convert.ToInt32(CheckedShip.Name[1].ToString());
                 int Length = Convert.ToInt32(CheckedShip.Name[1].ToString());
                 int vect = Vect_checkBox.Checked ? 1 : 0;
 
-                if (!Vect_checkBox.Checked && Checklength > 10)
+                if (!Vect_checkBox.Checked && CheckLY > 10)
                 {
                     MessageBox.Show("Корабль не влeзет");
                     return;
                 }
-                else if (Vect_checkBox.Checked && Checklength > 10)
+                else if (Vect_checkBox.Checked && CheckLX > 10)
                 {
                     MessageBox.Show("Корабль не влeзет");
                     return;
@@ -467,7 +501,7 @@ namespace Battleship
                     case "P4_radioButton":
                         {
                             ShipsGenerate(Length, x, y, vect, Ship);
-                            User_panel.Controls.Clear();
+                            ShowShip(Length, x, y, vect);
                             VisibleUserShips();
                             P4--;
                             if (P4 == 0)
@@ -476,12 +510,13 @@ namespace Battleship
                                 P4_radioButton.Checked = false;
                                 CheckedShip = null;
                             }
+                            ChangePSum();
                             break;
                         }
                     case "P3_radioButton":
                         {
                             ShipsGenerate(Length, x, y, vect, Ship);
-                            User_panel.Controls.Clear();
+                            ShowShip(Length, x, y, vect);
                             VisibleUserShips();
                             P3--;
                             if (P3 == 0)
@@ -490,12 +525,13 @@ namespace Battleship
                                 P3_radioButton.Checked = false;
                                 CheckedShip = null;
                             }
+                            ChangePSum();
                             break;
                         }
                     case "P2_radioButton":
                         {
                             ShipsGenerate(Length, x, y, vect, Ship);
-                            User_panel.Controls.Clear();
+                            ShowShip(Length, x, y, vect);
                             VisibleUserShips();
                             P2--;
                             if (P2 == 0)
@@ -504,12 +540,13 @@ namespace Battleship
                                 P2_radioButton.Checked = false;
                                 CheckedShip = null;
                             }
+                            ChangePSum();
                             break;
                         }
                     case "P1_radioButton":
                         {
                             ShipsGenerate(Length, x, y, vect, Ship);
-                            User_panel.Controls.Clear();
+                            ShowShip(Length, x, y, vect);
                             VisibleUserShips();
                             P1--;
                             if (P1 == 0)
@@ -518,11 +555,12 @@ namespace Battleship
                                 P1_radioButton.Checked = false;
                                 CheckedShip = null;
                             }
+                            ChangePSum();
                             break;
                         }
                 }
             }
-            catch(Exception E)
+            catch
             {
                 MessageBox.Show("Выберите тип корабля");
             }
@@ -627,6 +665,11 @@ namespace Battleship
                 P3 = 2;
                 P2 = 3;
                 P1 = 4;
+                P1_radioButton.Enabled = true;
+                P2_radioButton.Enabled = true;
+                P3_radioButton.Enabled = true;
+                P4_radioButton.Enabled = true;
+                Vect_checkBox.Enabled = true;
             }
         }
 
@@ -648,6 +691,25 @@ namespace Battleship
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             MessageBox.Show(Properties.Resources.HandGen);
+        }
+
+        private void Refresh_button_Click(object sender, EventArgs e)
+        {
+            UserShips = new Ship[Col, Row];
+            UserField = new PictureBox[Col, Row];
+            User_panel.Controls.Clear();
+            HandGen_panel.Show();
+
+            VisibleClearUserField();
+            P4 = 1;
+            P3 = 2;
+            P2 = 3;
+            P1 = 4;
+            P1_radioButton.Enabled = true;
+            P2_radioButton.Enabled = true;
+            P3_radioButton.Enabled = true;
+            P4_radioButton.Enabled = true;
+            Vect_checkBox.Enabled = true;
         }
 
         private void CreateRound()

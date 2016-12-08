@@ -462,6 +462,7 @@
             this.Refresh_button.Size = new System.Drawing.Size(23, 27);
             this.Refresh_button.TabIndex = 5;
             this.Refresh_button.UseVisualStyleBackColor = true;
+            this.Refresh_button.Click += new System.EventHandler(this.Refresh_button_Click);
             // 
             // P1_radioButton
             // 
