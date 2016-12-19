@@ -15,10 +15,27 @@ namespace Battleship
 
         Random rand = new Random();
 
+
+        ///////////////
+        private bool move = true;
+        int Gx;
+        int Gy;
+        int state = 0;
+        ///////////////
+
+
+
+
+
+
+
+
+
         private int P4 = 1;
         private int P3 = 2;
         private int P2 = 3;
         private int P1 = 4;
+
         
         RadioButton CheckedShip;
 
@@ -47,7 +64,6 @@ namespace Battleship
         public Form1()
         {
             InitializeComponent();
-            VisibleClearUserField();
         }
 
         private bool ChangePSum()
@@ -63,6 +79,7 @@ namespace Battleship
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            VisibleClearUserField();
             StopGame_button.Enabled = false;
         }
         // Установка буфферной зоны после убийства корабля
@@ -113,6 +130,9 @@ namespace Battleship
         // Обработчик клика по полю компьютера
         private void ClickCompField(Object sender, EventArgs e)
         {
+            if (!move)
+                return;
+
             PictureBox SenderPicture = sender as PictureBox;
 
             int x = Convert.ToInt32(SenderPicture.Name.Substring(0, 1));
@@ -127,9 +147,40 @@ namespace Battleship
                 SenderPicture.Image = CompShips[x, y].Hit();
                 if (!CompShips[x, y].CheckLife())
                     UpdateField();
+                return;
             }
             else
                 SenderPicture.Image = Images[1];
+            move = false;
+            CompMove(state);
+        }
+
+        public void CompMove(int action)
+        {
+            switch (action)
+            {
+                case 0:
+                    Shot();
+                    return;
+            }
+        }
+        public void Shot()
+        {
+            Gx = rand.Next(0, 10);
+            Gy = rand.Next(0, 10);
+
+            if (UserShips[Gx, Gy] == null)
+            {
+                UserField[Gx, Gy].Image = Images[1];
+                //MessageBox.Show(UserField[Gx, Gy].Image.ToString());
+                move = true;
+                return;
+            }
+
+            UserField[Gx, Gy].Image = Images[2];
+            //MessageBox.Show(UserField[Gx, Gy].Image.ToString());
+
+            CompMove(state);
         }
         // Рисуем поле компьютера (чистое море)
         private void CreateField()
@@ -502,7 +553,7 @@ namespace Battleship
                         {
                             ShipsGenerate(Length, x, y, vect, Ship);
                             ShowShip(Length, x, y, vect);
-                            VisibleUserShips();
+                            //VisibleUserShips();
                             P4--;
                             if (P4 == 0)
                             {
@@ -517,7 +568,7 @@ namespace Battleship
                         {
                             ShipsGenerate(Length, x, y, vect, Ship);
                             ShowShip(Length, x, y, vect);
-                            VisibleUserShips();
+                            //VisibleUserShips();
                             P3--;
                             if (P3 == 0)
                             {
@@ -532,7 +583,7 @@ namespace Battleship
                         {
                             ShipsGenerate(Length, x, y, vect, Ship);
                             ShowShip(Length, x, y, vect);
-                            VisibleUserShips();
+                            //VisibleUserShips();
                             P2--;
                             if (P2 == 0)
                             {
@@ -547,7 +598,7 @@ namespace Battleship
                         {
                             ShipsGenerate(Length, x, y, vect, Ship);
                             ShowShip(Length, x, y, vect);
-                            VisibleUserShips();
+                            //VisibleUserShips();
                             P1--;
                             if (P1 == 0)
                             {
@@ -647,7 +698,6 @@ namespace Battleship
             if (Gen_checkBox.Checked)
             {
                 UserShips = new Ship[Col, Row];
-                UserField = new PictureBox[Col, Row];
                 User_panel.Controls.Clear();
                 CreateUserShips();
                 VisibleUserShips();
@@ -656,7 +706,6 @@ namespace Battleship
             else
             {
                 UserShips = new Ship[Col, Row];
-                UserField = new PictureBox[Col, Row];
                 User_panel.Controls.Clear();
                 HandGen_panel.Show();
 
@@ -710,6 +759,11 @@ namespace Battleship
             P3_radioButton.Enabled = true;
             P4_radioButton.Enabled = true;
             Vect_checkBox.Enabled = true;
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            move = true;
         }
 
         private void CreateRound()

@@ -73,10 +73,12 @@
             this.P4_radioButton = new System.Windows.Forms.RadioButton();
             this.Vect_checkBox = new System.Windows.Forms.CheckBox();
             this.Gen_checkBox = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.MainField_groupBox.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.Menu_groupBox.SuspendLayout();
+            this.Stat_groupBox.SuspendLayout();
             this.Ships_groupBox.SuspendLayout();
             this.HandGen_panel.SuspendLayout();
             this.SuspendLayout();
@@ -412,6 +414,7 @@
             // 
             // Stat_groupBox
             // 
+            this.Stat_groupBox.Controls.Add(this.button1);
             this.Stat_groupBox.Location = new System.Drawing.Point(502, 180);
             this.Stat_groupBox.Name = "Stat_groupBox";
             this.Stat_groupBox.Size = new System.Drawing.Size(157, 99);
@@ -533,6 +536,16 @@
             this.Gen_checkBox.UseVisualStyleBackColor = true;
             this.Gen_checkBox.CheckedChanged += new System.EventHandler(this.Gen_checkBox_CheckedChanged);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(51, 51);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -556,6 +569,7 @@
             this.MainField_groupBox.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.Menu_groupBox.ResumeLayout(false);
+            this.Stat_groupBox.ResumeLayout(false);
             this.Ships_groupBox.ResumeLayout(false);
             this.Ships_groupBox.PerformLayout();
             this.HandGen_panel.ResumeLayout(false);
@@ -611,6 +625,7 @@
         private System.Windows.Forms.RadioButton P2_radioButton;
         private System.Windows.Forms.Button Refresh_button;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Button button1;
     }
 }
 
