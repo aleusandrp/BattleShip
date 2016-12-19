@@ -45,10 +45,10 @@ namespace Battleship
            Row = 10;
         // Массив картинок поля компьютера
         PictureBox[,] CompField = new PictureBox[Col, Row];
+        // Массив картинок поля пользователя
+        PictureBox[,] UserField = new PictureBox[Col, Row];ы
         // Игровое поле компьютера
         Ship[,] CompShips = new Ship[Col, Row];
-        // Массив картинок поля пользователя
-        PictureBox[,] UserField = new PictureBox[Col, Row];
         // Игровое поле пользователя
         Ship[,] UserShips = new Ship[Col, Row];
         // Массив картинок
