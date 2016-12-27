@@ -16,21 +16,22 @@ namespace Battleship
         Random rand = new Random();
 
 
-        ////////ходы компа///////
+        ///////////////
         private bool move = true;
         int Gx;
         int Gy;
         int state = 0;
         int[] vect = new int[4] { 1, 1, 1, 1 };
         int movevect;
-        int attackside;
         ///////////////
 
 
 
 
 
-            
+
+
+
 
         private int P4 = 1;
         private int P3 = 2;
@@ -167,7 +168,7 @@ namespace Battleship
                     Vect();
                     return;
                 case 2:
-                    Kill();
+                    MessageBox.Show("Добиваем");
                     break;
             }
         }
@@ -186,17 +187,15 @@ namespace Battleship
                 move = true;
                 return;
             }
-            GameLog_listBox.Items.Add((Gy+1) +  " " + (Gx+1));
-            UserShips[Gx, Gy].Hit();
-            if (!UserShips[Gx, Gy].CheckLife())
+            
+            if(!UserShips[Gx,Gy].CheckLife())
             {
                 UserField[Gx, Gy].Image = Images[4];
                 Buffer(Gx, Gy, UserField, UserShips);
                 CompMove(state);
-                return;
             }
 
-            UserField[Gx, Gy].Image = Images[4];
+            UserField[Gx, Gy].Image = Images[2];
             state = 1;
             vect = new int[4] { 1, 1, 1, 1 };
             CompMove(state);
@@ -215,7 +214,13 @@ namespace Battleship
                 {
                     CompMove(state);
                 }
-
+                /*         
+                global::Battleship.Properties.Resources.sea,
+                global::Battleship.Properties.Resources.shot,
+                global::Battleship.Properties.Resources.hit,
+                global::Battleship.Properties.Resources.ship,
+                global::Battleship.Properties.Resources.dead
+                */
                 switch (Rvect)
                 {
                     //верх
@@ -226,20 +231,15 @@ namespace Battleship
                                 vect[0] = 0;
                                 if (UserShips[Gx - 1, Gy] != null)
                                 {
-                                    UserShips[Gx - 1, Gy].Hit();
-                                    if (!UserShips[Gx - 1, Gy].CheckLife())
+                                    if (!UserShips[Gx, Gy].CheckLife())
                                     {
-                                        UserField[Gx, Gy].Image = Images[4];
-                                        UserField[Gx - 1, Gy].Image = Images[4];
                                         Buffer(Gx, Gy, UserField, UserShips);
-                                        Buffer(Gx - 1, Gy, UserField, UserShips);
                                         state = 0;
                                     }
                                     else
                                     {
                                         UserField[Gx - 1, Gy].Image = Images[2];
                                         movevect = 1;
-                                        attackside = 1;
                                         state = 2;
                                     }
                                     CompMove(state);
@@ -247,7 +247,7 @@ namespace Battleship
                                 else
                                 {
                                     UserField[Gx - 1, Gy].Image = Images[1];
-                                    move = true;
+                                    move = !move;
                                 }
                             }
                             else
@@ -265,20 +265,15 @@ namespace Battleship
                             {
                                 if (UserShips[Gx + 1, Gy] != null)
                                 {
-                                    UserShips[Gx + 1, Gy].Hit();
-                                    if (!UserShips[Gx + 1, Gy].CheckLife())
+                                    if (!UserShips[Gx, Gy].CheckLife())
                                     {
-                                        UserField[Gx, Gy].Image = Images[4];
-                                        UserField[Gx + 1, Gy].Image = Images[4];
                                         Buffer(Gx, Gy, UserField, UserShips);
-                                        Buffer(Gx + 1, Gy, UserField, UserShips);
                                         state = 0;
                                     }
                                     else
                                     {
                                         UserField[Gx + 1, Gy].Image = Images[2];
                                         movevect = 1;
-                                        attackside = 0;
                                         state = 2;
                                     }
                                     CompMove(state);
@@ -286,7 +281,7 @@ namespace Battleship
                                 else
                                 {
                                     UserField[Gx + 1, Gy].Image = Images[1];
-                                    move = true;
+                                    move = !move;
                                 }
                             }
                             else
@@ -304,20 +299,15 @@ namespace Battleship
                                 vect[2] = 0;
                                 if (UserShips[Gx, Gy - 1] != null)
                                 {
-                                    UserShips[Gx, Gy - 1].Hit();
-                                    if (!UserShips[Gx, Gy - 1].CheckLife())
+                                    if (!UserShips[Gx, Gy].CheckLife())
                                     {
-                                        UserField[Gx, Gy].Image = Images[4];
-                                        UserField[Gx, Gy - 1].Image = Images[4];
                                         Buffer(Gx, Gy, UserField, UserShips);
-                                        Buffer(Gx, Gy - 1, UserField, UserShips);
                                         state = 0;
                                     }
                                     else
                                     {
                                         UserField[Gx, Gy - 1].Image = Images[2];
-                                        movevect = 0;
-                                        attackside = 0;
+                                        movevect = 1;
                                         state = 2;
                                     }
                                     CompMove(state);
@@ -325,7 +315,7 @@ namespace Battleship
                                 else
                                 {
                                     UserField[Gx, Gy - 1].Image = Images[1];
-                                    move = true;
+                                    move = !move;
                                 }
                             }
                             else
@@ -343,20 +333,15 @@ namespace Battleship
                                 vect[3] = 0;
                                 if (UserShips[Gx, Gy + 1] != null)
                                 {
-                                    UserShips[Gx, Gy + 1].Hit();
-                                    if (!UserShips[Gx, Gy + 1].CheckLife())
+                                    if (!UserShips[Gx, Gy].CheckLife())
                                     {
-                                        UserField[Gx, Gy].Image = Images[4];
-                                        UserField[Gx, Gy + 1].Image = Images[4];
                                         Buffer(Gx, Gy, UserField, UserShips);
-                                        Buffer(Gx, Gy + 1, UserField, UserShips);
                                         state = 0;
                                     }
                                     else
                                     {
                                         UserField[Gx, Gy + 1].Image = Images[2];
-                                        attackside = 1;
-                                        movevect = 0;
+                                        movevect = 1;
                                         state = 2;
                                     }
                                     CompMove(state);
@@ -364,7 +349,7 @@ namespace Battleship
                                 else
                                 {
                                     UserField[Gx, Gy + 1].Image = Images[1];
-                                    move = true;
+                                    move = !move;
                                 }
                             }
                             else
@@ -377,181 +362,6 @@ namespace Battleship
                 }
             }
 
-        }
-
-        public void Kill()
-        {
-            switch (movevect)
-            {
-                case 0:
-                    {
-                        if(attackside == 1)
-                        {
-                            for (int i = 1; i < 4; i++)
-                            {
-                                if (Gy + i <= 9)
-                                {
-                                    if (UserShips[Gx, Gy + i] != null) 
-                                    {
-                                        Buffer(Gx, Gy + i, UserField, UserShips);
-                                        UserField[Gx, Gy + i].Image = Images[4];
-
-                                        if(!UserShips[Gx, Gy + i].CheckLife())
-                                        {
-                                            state = 0;
-                                            CompMove(state);
-                                            return;
-                                        }
-                                        UserShips[Gx, Gy + i].Hit();
-                                    }
-                                    else
-                                    {
-                                        attackside = 0;
-                                        move = true;
-                                        break;
-                                    }
-                                }
-                                else
-                                {
-                                    attackside = 0;
-                                    move = true;
-                                    break;
-                                }
-                            }
-                            if (UserShips[Gx, Gy].CheckLife())
-                            {
-                                attackside = 0;
-                                CompMove(state);
-                                return;
-                            }
-                        }
-                        else
-                        {
-                            for (int i = 1; i < 4; i++)
-                            {
-                                if (Gy - i >= 0)
-                                {
-                                    if (UserShips[Gx, Gy - i] != null)
-                                    {
-                                        Buffer(Gx, Gy - i, UserField, UserShips);
-                                        UserField[Gx, Gy - i].Image = Images[4];
-
-                                        if (!UserShips[Gx, Gy - i].CheckLife())
-                                        {
-                                            state = 0;
-                                            CompMove(state);
-                                            return;
-                                        }
-                                        UserShips[Gx, Gy - i].Hit();
-                                    }
-                                    else
-                                    {
-                                        attackside = 1;
-                                        move = true;
-                                        break;
-                                    }
-                                }
-                                else
-                                {
-                                    attackside = 1;
-                                    move = true;
-                                    break;
-                                }
-                            }
-                            if (UserShips[Gx, Gy].CheckLife())
-                            {
-                                attackside = 1;
-                                CompMove(state);
-                                return;
-                            }
-                        }
-                    }
-                    break;
-                case 1:
-                    {
-                        if (attackside == 1)
-                        {
-                            for (int i = 1; i < 4; i++)
-                            {
-                                if (Gx - i >= 0)
-                                {
-                                    if (UserShips[Gx - i, Gy] != null)
-                                    {
-                                        Buffer(Gx - i, Gy, UserField, UserShips);
-                                        UserField[Gx - i, Gy].Image = Images[4];
-
-                                        if (!UserShips[Gx - i, Gy].CheckLife())
-                                        {
-                                            state = 0;
-                                            CompMove(state);
-                                            return;
-                                        }
-                                        UserShips[Gx - i, Gy].Hit();
-                                    }
-                                    else
-                                    {
-                                        attackside = 0;
-                                        move = true;
-                                        break;
-                                    }
-                                }
-                                else
-                                {
-                                    attackside = 0;
-                                    move = true;
-                                    break;
-                                }
-                            }
-                            if (UserShips[Gx, Gy].CheckLife())
-                            {
-                                attackside = 0;
-                                CompMove(state);
-                                return;
-                            }
-                        }
-                        else
-                        {
-                            for (int i = 1; i < 5; i++)
-                            {
-                                if (Gx + i <= 9)
-                                {
-                                    if (UserShips[Gx + i, Gy] != null)
-                                    {
-                                        Buffer(Gx + i, Gy, UserField, UserShips);
-                                        UserField[Gx + i, Gy].Image = Images[4];
-
-                                        if (!UserShips[Gx + i, Gy].CheckLife())
-                                        {
-                                            state = 0;
-                                            CompMove(state);
-                                            return;
-                                        }
-                                        UserShips[Gx + i, Gy].Hit();
-                                    }
-                                    else
-                                    {
-                                        attackside = 1;
-                                        move = true;
-                                        break;
-                                    }
-                                }
-                                else
-                                {
-                                    attackside = 1;
-                                    move = true;
-                                    break;
-                                }
-                            }
-                            if (UserShips[Gx, Gy].CheckLife())
-                            {
-                                attackside = 1;
-                                CompMove(state);
-                                return;
-                            }
-                        }
-                    }
-                    break;
-            }
         }
         private void CreateField()
         {
