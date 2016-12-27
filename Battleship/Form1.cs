@@ -30,7 +30,8 @@ namespace Battleship
 
 
 
-            
+        private int UShips = 10;
+        private int CShips = 10;
 
         private int P4 = 1;
         private int P3 = 2;
@@ -128,6 +129,13 @@ namespace Battleship
                 }
             }
         }
+        public void CheckGameStatus()
+        {
+            if (UShips == 0)
+                StopGame("проиграли!");
+            if (CShips == 0)
+                StopGame("победили!");
+        }
         // Обработчик клика по полю компьютера
         private void ClickCompField(Object sender, EventArgs e)
         {
@@ -147,7 +155,11 @@ namespace Battleship
             {
                 SenderPicture.Image = CompShips[x, y].Hit();
                 if (!CompShips[x, y].CheckLife())
+                {
                     UpdateField();
+                    CShips--;
+                    CheckGameStatus();
+                }
                 return;
             }
             else
@@ -186,10 +198,11 @@ namespace Battleship
                 move = true;
                 return;
             }
-            GameLog_listBox.Items.Add((Gy+1) +  " " + (Gx+1));
             UserShips[Gx, Gy].Hit();
             if (!UserShips[Gx, Gy].CheckLife())
             {
+                UShips--;
+                CheckGameStatus();
                 UserField[Gx, Gy].Image = Images[4];
                 Buffer(Gx, Gy, UserField, UserShips);
                 CompMove(state);
@@ -229,6 +242,8 @@ namespace Battleship
                                     UserShips[Gx - 1, Gy].Hit();
                                     if (!UserShips[Gx - 1, Gy].CheckLife())
                                     {
+                                        UShips--;
+                                        CheckGameStatus();
                                         UserField[Gx, Gy].Image = Images[4];
                                         UserField[Gx - 1, Gy].Image = Images[4];
                                         Buffer(Gx, Gy, UserField, UserShips);
@@ -268,6 +283,8 @@ namespace Battleship
                                     UserShips[Gx + 1, Gy].Hit();
                                     if (!UserShips[Gx + 1, Gy].CheckLife())
                                     {
+                                        UShips--;
+                                        CheckGameStatus();
                                         UserField[Gx, Gy].Image = Images[4];
                                         UserField[Gx + 1, Gy].Image = Images[4];
                                         Buffer(Gx, Gy, UserField, UserShips);
@@ -307,6 +324,8 @@ namespace Battleship
                                     UserShips[Gx, Gy - 1].Hit();
                                     if (!UserShips[Gx, Gy - 1].CheckLife())
                                     {
+                                        UShips--;
+                                        CheckGameStatus();
                                         UserField[Gx, Gy].Image = Images[4];
                                         UserField[Gx, Gy - 1].Image = Images[4];
                                         Buffer(Gx, Gy, UserField, UserShips);
@@ -346,6 +365,8 @@ namespace Battleship
                                     UserShips[Gx, Gy + 1].Hit();
                                     if (!UserShips[Gx, Gy + 1].CheckLife())
                                     {
+                                        UShips--;
+                                        CheckGameStatus();
                                         UserField[Gx, Gy].Image = Images[4];
                                         UserField[Gx, Gy + 1].Image = Images[4];
                                         Buffer(Gx, Gy, UserField, UserShips);
@@ -398,6 +419,8 @@ namespace Battleship
 
                                         if(!UserShips[Gx, Gy + i].CheckLife())
                                         {
+                                            UShips--;
+                                            CheckGameStatus();
                                             state = 0;
                                             CompMove(state);
                                             return;
@@ -420,6 +443,8 @@ namespace Battleship
                             }
                             if (UserShips[Gx, Gy].CheckLife())
                             {
+                                UShips--;
+                                CheckGameStatus();
                                 attackside = 0;
                                 CompMove(state);
                                 return;
@@ -438,6 +463,8 @@ namespace Battleship
 
                                         if (!UserShips[Gx, Gy - i].CheckLife())
                                         {
+                                            UShips--;
+                                            CheckGameStatus();
                                             state = 0;
                                             CompMove(state);
                                             return;
@@ -460,6 +487,8 @@ namespace Battleship
                             }
                             if (UserShips[Gx, Gy].CheckLife())
                             {
+                                UShips--;
+                                CheckGameStatus();
                                 attackside = 1;
                                 CompMove(state);
                                 return;
@@ -482,6 +511,8 @@ namespace Battleship
 
                                         if (!UserShips[Gx - i, Gy].CheckLife())
                                         {
+                                            UShips--;
+                                            CheckGameStatus();
                                             state = 0;
                                             CompMove(state);
                                             return;
@@ -504,6 +535,8 @@ namespace Battleship
                             }
                             if (UserShips[Gx, Gy].CheckLife())
                             {
+                                UShips--;
+                                CheckGameStatus();
                                 attackside = 0;
                                 CompMove(state);
                                 return;
@@ -522,6 +555,8 @@ namespace Battleship
 
                                         if (!UserShips[Gx + i, Gy].CheckLife())
                                         {
+                                            UShips--;
+                                            CheckGameStatus();
                                             state = 0;
                                             CompMove(state);
                                             return;
@@ -544,6 +579,8 @@ namespace Battleship
                             }
                             if (UserShips[Gx, Gy].CheckLife())
                             {
+                                UShips--;
+                                CheckGameStatus();
                                 attackside = 1;
                                 CompMove(state);
                                 return;
@@ -755,10 +792,11 @@ namespace Battleship
         {
             if (Gen_checkBox.Checked || ChangePSum())
             {
+                UShips = 10;
+                CShips = 10;
                 StartGame_button.Enabled = false;
                 StopGame_button.Enabled = true;
                 Ships_groupBox.Enabled = false;
-                GameLog_listBox.Items.Add("Игра начата");
                 CreateRound();
                 CreateField();
                 StopGame_button.Focus();
@@ -820,14 +858,28 @@ namespace Battleship
             User_panel.Controls.Clear();
         }
 
-        private void StopGame_button_Click(object sender, EventArgs e)
+        public void StopGame(string str)
         {
+            MessageBox.Show("Игра завершена. Вы " + str, "Игра завершена");
+
             FallGame();
+            Gen_checkBox.Checked = false;
             StopGame_button.Enabled = false;
             StartGame_button.Enabled = true;
             Ships_groupBox.Enabled = true;
-            GameLog_listBox.Items.Clear();
             VisibleClearUserField();
+
+        }
+
+        private void StopGame_button_Click(object sender, EventArgs e)
+        {
+            FallGame();
+            Gen_checkBox.Checked = false;
+            StopGame_button.Enabled = false;
+            StartGame_button.Enabled = true;
+            Ships_groupBox.Enabled = true;
+            VisibleClearUserField();
+
             MessageBox.Show("Вы досрочно закончили игру, можете начать новую.", "Игра завершена");
         }
         // Создание кораблей игрока (при выборе кнопки сгенерировать)
@@ -885,6 +937,8 @@ namespace Battleship
         // Обработчик клика по полю пользователя
         private void ClickUserField(Object sender, EventArgs e)
         {
+            if (!StartGame_button.Enabled)
+                return;
 
             PictureBox SenderPicture = sender as PictureBox;
 

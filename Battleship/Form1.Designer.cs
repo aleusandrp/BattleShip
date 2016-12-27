@@ -29,10 +29,6 @@
         private void InitializeComponent()
         {
             this.User_panel = new System.Windows.Forms.Panel();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.морскойБойToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.новаяИграToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.GameLog_listBox = new System.Windows.Forms.ListBox();
             this.MainField_groupBox = new System.Windows.Forms.GroupBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -57,28 +53,21 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.Comp_panel = new System.Windows.Forms.Panel();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.Menu_groupBox = new System.Windows.Forms.GroupBox();
             this.CloseGame_button = new System.Windows.Forms.Button();
             this.StopGame_button = new System.Windows.Forms.Button();
             this.StartGame_button = new System.Windows.Forms.Button();
-            this.Stat_groupBox = new System.Windows.Forms.GroupBox();
             this.Ships_groupBox = new System.Windows.Forms.GroupBox();
             this.HandGen_panel = new System.Windows.Forms.Panel();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.Refresh_button = new System.Windows.Forms.Button();
             this.P1_radioButton = new System.Windows.Forms.RadioButton();
             this.P2_radioButton = new System.Windows.Forms.RadioButton();
             this.P3_radioButton = new System.Windows.Forms.RadioButton();
             this.P4_radioButton = new System.Windows.Forms.RadioButton();
             this.Vect_checkBox = new System.Windows.Forms.CheckBox();
             this.Gen_checkBox = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.menuStrip1.SuspendLayout();
             this.MainField_groupBox.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.Menu_groupBox.SuspendLayout();
-            this.Stat_groupBox.SuspendLayout();
             this.Ships_groupBox.SuspendLayout();
             this.HandGen_panel.SuspendLayout();
             this.SuspendLayout();
@@ -89,38 +78,6 @@
             this.User_panel.Name = "User_panel";
             this.User_panel.Size = new System.Drawing.Size(200, 200);
             this.User_panel.TabIndex = 1;
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.морскойБойToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(667, 24);
-            this.menuStrip1.TabIndex = 2;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // морскойБойToolStripMenuItem
-            // 
-            this.морскойБойToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.новаяИграToolStripMenuItem});
-            this.морскойБойToolStripMenuItem.Name = "морскойБойToolStripMenuItem";
-            this.морскойБойToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
-            this.морскойБойToolStripMenuItem.Text = "Морской бой";
-            // 
-            // новаяИграToolStripMenuItem
-            // 
-            this.новаяИграToolStripMenuItem.Name = "новаяИграToolStripMenuItem";
-            this.новаяИграToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.новаяИграToolStripMenuItem.Text = "Новая игра";
-            // 
-            // GameLog_listBox
-            // 
-            this.GameLog_listBox.FormattingEnabled = true;
-            this.GameLog_listBox.Location = new System.Drawing.Point(6, 19);
-            this.GameLog_listBox.Name = "GameLog_listBox";
-            this.GameLog_listBox.Size = new System.Drawing.Size(458, 108);
-            this.GameLog_listBox.TabIndex = 3;
             // 
             // MainField_groupBox
             // 
@@ -148,7 +105,7 @@
             this.MainField_groupBox.Controls.Add(this.label1);
             this.MainField_groupBox.Controls.Add(this.User_panel);
             this.MainField_groupBox.Controls.Add(this.Comp_panel);
-            this.MainField_groupBox.Location = new System.Drawing.Point(15, 32);
+            this.MainField_groupBox.Location = new System.Drawing.Point(12, 12);
             this.MainField_groupBox.Name = "MainField_groupBox";
             this.MainField_groupBox.Size = new System.Drawing.Size(481, 247);
             this.MainField_groupBox.TabIndex = 4;
@@ -360,22 +317,12 @@
             this.Comp_panel.Size = new System.Drawing.Size(200, 200);
             this.Comp_panel.TabIndex = 0;
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.GameLog_listBox);
-            this.groupBox2.Location = new System.Drawing.Point(15, 279);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(481, 140);
-            this.groupBox2.TabIndex = 5;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Игровой лог";
-            // 
             // Menu_groupBox
             // 
             this.Menu_groupBox.Controls.Add(this.CloseGame_button);
             this.Menu_groupBox.Controls.Add(this.StopGame_button);
             this.Menu_groupBox.Controls.Add(this.StartGame_button);
-            this.Menu_groupBox.Location = new System.Drawing.Point(502, 32);
+            this.Menu_groupBox.Location = new System.Drawing.Point(336, 265);
             this.Menu_groupBox.Name = "Menu_groupBox";
             this.Menu_groupBox.Size = new System.Drawing.Size(157, 142);
             this.Menu_groupBox.TabIndex = 7;
@@ -412,21 +359,11 @@
             this.StartGame_button.UseVisualStyleBackColor = true;
             this.StartGame_button.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Stat_groupBox
-            // 
-            this.Stat_groupBox.Controls.Add(this.button1);
-            this.Stat_groupBox.Location = new System.Drawing.Point(502, 180);
-            this.Stat_groupBox.Name = "Stat_groupBox";
-            this.Stat_groupBox.Size = new System.Drawing.Size(157, 99);
-            this.Stat_groupBox.TabIndex = 8;
-            this.Stat_groupBox.TabStop = false;
-            this.Stat_groupBox.Text = "Статистика";
-            // 
             // Ships_groupBox
             // 
             this.Ships_groupBox.Controls.Add(this.HandGen_panel);
             this.Ships_groupBox.Controls.Add(this.Gen_checkBox);
-            this.Ships_groupBox.Location = new System.Drawing.Point(502, 279);
+            this.Ships_groupBox.Location = new System.Drawing.Point(173, 267);
             this.Ships_groupBox.Name = "Ships_groupBox";
             this.Ships_groupBox.Size = new System.Drawing.Size(157, 140);
             this.Ships_groupBox.TabIndex = 9;
@@ -436,7 +373,6 @@
             // HandGen_panel
             // 
             this.HandGen_panel.Controls.Add(this.linkLabel1);
-            this.HandGen_panel.Controls.Add(this.Refresh_button);
             this.HandGen_panel.Controls.Add(this.P1_radioButton);
             this.HandGen_panel.Controls.Add(this.P2_radioButton);
             this.HandGen_panel.Controls.Add(this.P3_radioButton);
@@ -450,22 +386,13 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(122, 23);
+            this.linkLabel1.Location = new System.Drawing.Point(96, 4);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(13, 13);
             this.linkLabel1.TabIndex = 2;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "?";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
-            // Refresh_button
-            // 
-            this.Refresh_button.Location = new System.Drawing.Point(115, 58);
-            this.Refresh_button.Name = "Refresh_button";
-            this.Refresh_button.Size = new System.Drawing.Size(23, 27);
-            this.Refresh_button.TabIndex = 5;
-            this.Refresh_button.UseVisualStyleBackColor = true;
-            this.Refresh_button.Click += new System.EventHandler(this.Refresh_button_Click);
             // 
             // P1_radioButton
             // 
@@ -536,57 +463,33 @@
             this.Gen_checkBox.UseVisualStyleBackColor = true;
             this.Gen_checkBox.CheckedChanged += new System.EventHandler(this.Gen_checkBox_CheckedChanged);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(51, 51);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(667, 431);
+            this.ClientSize = new System.Drawing.Size(505, 410);
             this.Controls.Add(this.Ships_groupBox);
-            this.Controls.Add(this.Stat_groupBox);
             this.Controls.Add(this.Menu_groupBox);
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.MainField_groupBox);
-            this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Морской бой";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.MainField_groupBox.ResumeLayout(false);
             this.MainField_groupBox.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
             this.Menu_groupBox.ResumeLayout(false);
-            this.Stat_groupBox.ResumeLayout(false);
             this.Ships_groupBox.ResumeLayout(false);
             this.Ships_groupBox.PerformLayout();
             this.HandGen_panel.ResumeLayout(false);
             this.HandGen_panel.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.Panel User_panel;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ListBox GameLog_listBox;
         private System.Windows.Forms.GroupBox MainField_groupBox;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.ToolStripMenuItem морскойБойToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem новаяИграToolStripMenuItem;
         private System.Windows.Forms.Panel Comp_panel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;
@@ -614,7 +517,6 @@
         private System.Windows.Forms.Button CloseGame_button;
         private System.Windows.Forms.Button StopGame_button;
         private System.Windows.Forms.Button StartGame_button;
-        private System.Windows.Forms.GroupBox Stat_groupBox;
         private System.Windows.Forms.GroupBox Ships_groupBox;
         private System.Windows.Forms.CheckBox Gen_checkBox;
         private System.Windows.Forms.Panel HandGen_panel;
@@ -623,9 +525,7 @@
         private System.Windows.Forms.RadioButton P4_radioButton;
         private System.Windows.Forms.RadioButton P1_radioButton;
         private System.Windows.Forms.RadioButton P2_radioButton;
-        private System.Windows.Forms.Button Refresh_button;
         private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.Button button1;
     }
 }
 
